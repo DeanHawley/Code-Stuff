@@ -1,0 +1,260 @@
+/* Base styles for the body */
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #1a202c; /* Dark background */
+    display: flex;
+    flex-direction: column; /* Changed to column to center the game-container */
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #e2e8f0; /* Light text */
+    overflow: hidden; /* Prevent body scroll */
+}
+
+/* Main container for the game (canvas + sidebar) */
+.game-container {
+    display: flex;
+    background-color: #0d1117; /* Darker background for the game area */
+    border: 2px solid #4a5568; /* Subtle border */
+    border-radius: 0.75rem; /* Rounded corners */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Soft shadow */
+    overflow: hidden; /* Ensures rounded corners apply to content */
+    max-width: 95vw; /* Max width to fit on larger screens */
+    max-height: 95vh; /* Max height to fit on larger screens */
+}
+
+/* Styling for the game canvas */
+canvas {
+    background-color: #0d1117; /* Original darker background for canvas */
+    display: block;
+    touch-action: none; /* Prevent default touch actions like scrolling */
+    flex-shrink: 0; /* Prevent canvas from shrinking */
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 250px; /* Fixed width for the sidebar */
+    background-color: #e0d7c7; /* Light brown/beige background */
+    color: #333; /* Dark text for contrast */
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Enable scrolling for sidebar content */
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+    border-left: 1px solid #c0b7a7; /* Separator from canvas */
+}
+
+/* Section styling (e.g., SOLIDS, POWDERS) */
+.section {
+    margin-bottom: 0.5rem;
+    border-radius: 0.375rem; /* Slightly rounded corners for sections */
+    overflow: hidden; /* Hide overflowing content when collapsed */
+}
+
+.section-header {
+    background-color: #c0b7a7; /* Header background */
+    color: #4a4a4a; /* Header text color */
+    padding: 0.5rem 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none; /* Prevent text selection */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #b0a797;
+}
+
+.section-header::after {
+    content: '▼'; /* Down arrow for expandable */
+    font-size: 0.8em;
+    transition: transform 0.2s ease-in-out;
+}
+
+.section-header.collapsed::after {
+    content: '▶'; /* Right arrow when collapsed */
+    transform: rotate(0deg);
+}
+
+.section-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); /* Responsive grid for buttons */
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: #f0e7d7; /* Lighter background for content */
+    border-top: 1px solid #d0c7b7;
+}
+
+.section-content.collapsed {
+    display: none; /* Hide content when section is collapsed */
+}
+
+/* Material button styling */
+.material-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    border: 1px solid transparent; /* Default transparent border */
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    background-color: #fff; /* Default button background */
+    color: #333; /* Default text color */
+    font-size: 0.75rem; /* Smaller font for material names */
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.material-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border-color: #999; /* Light border on hover */
+}
+
+.material-button.selected {
+    border-color: #3b82f6; /* Blue border when selected */
+    box-shadow: 0 0 0 2px #3b82f6; /* Blue glow */
+    transform: translateY(0); /* Reset lift on selected */
+}
+
+.material-color-swatch {
+    width: 32px; /* Square swatch */
+    height: 32px;
+    border-radius: 0.375rem; /* Rounded corners for swatch */
+    margin-bottom: 0.25rem;
+    border: 1px solid rgba(0,0,0,0.1); /* Subtle border for swatch */
+}
+
+/* Tool button styling (Eraser, Clear All) */
+.tool-button {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 0.5rem;
+    background-color: #a0aec0; /* Default tool button color */
+    color: #2d3748;
+}
+
+.tool-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+#clearBtn {
+    background-color: #e53e3e;
+    color: #fff;
+}
+#clearBtn:hover {
+    background-color: #c53030;
+}
+
+#emptyBtn {
+    background-color: #e2e8f0;
+    color: #2d3748;
+}
+#emptyBtn.selected {
+    background-color: #cbd5e0;
+}
+
+/* Tool item for brush size */
+.tool-item {
+    padding: 0.5rem;
+    background-color: #f0e7d7;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+.tool-item label {
+    font-weight: bold;
+    color: #333;
+}
+.tool-item input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+    border-radius: 4px;
+}
+.tool-item input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+.tool-item input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+
+
+/* Styling for the message box */
+.message-box {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2d3748; /* Dark gray background */
+    color: #e2e8f0; /* Light text */
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure it's on top */
+    opacity: 0; /* Hidden by default */
+    visibility: hidden; /* Hidden by default */
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; /* Smooth fade in/out */
+}
+.message-box.show {
+    opacity: 1; /* Show when 'show' class is added */
+    visibility: visible;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .game-container {
+        flex-direction: column; /* Stack canvas and sidebar vertically */
+        max-height: unset; /* Remove max height for vertical stacking */
+        width: 100vw; /* Take full width */
+        height: 100vh; /* Take full height */
+        border-radius: 0; /* No rounded corners on full screen */
+        border: none;
+        box-shadow: none;
+    }
+
+    canvas {
+        flex-grow: 1; /* Canvas takes available height */
+        width: 100%; /* Canvas takes full width */
+        border-bottom: 1px solid #4a5568; /* Separator for canvas and sidebar */
+    }
+
+    .sidebar {
+        width: 100%; /* Sidebar takes full width */
+        height: auto; /* Height adjusts to content */
+        border-left: none; /* Remove left border */
+        border-top: 1px solid #c0b7a7; /* Add top border */
+    }
+
+    .section-content {
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); /* Adjust grid for smaller screens */
+    }
+}
