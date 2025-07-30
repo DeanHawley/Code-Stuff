@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sand Game</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link to your external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+
+        <div class="sidebar">
+            <!-- Solids Section -->
+            <div class="section">
+                <div class="section-header" data-section="solids">SOLIDS</div>
+                <div class="section-content" id="solids-content">
+                    <!-- Solid material buttons will be inserted here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Powders Section -->
+            <div class="section">
+                <div class="section-header" data-section="powders">POWDERS</div>
+                <div class="section-content" id="powders-content">
+                    <!-- Powder material buttons will be inserted here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Liquids Section -->
+            <div class="section">
+                <div class="section-header" data-section="liquids">LIQUIDS</div>
+                <div class="section-content" id="liquids-content">
+                    <!-- Liquid material buttons will be inserted here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Gases Section -->
+            <div class="section">
+                <div class="section-header" data-section="gases">GASES</div>
+                <div class="section-content" id="gases-content">
+                    <!-- Gas material buttons will be inserted here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Misc Section -->
+            <div class="section">
+                <div class="section-header" data-section="misc">MISC</div>
+                <div class="section-content" id="misc-content">
+                    <!-- Misc material buttons will be inserted here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Tools Section -->
+            <div class="section">
+                <div class="section-header" data-section="tools">TOOLS</div>
+                <div class="section-content" id="tools-content">
+                    <div class="tool-item">
+                        <label for="brushSize">Brush Size:</label>
+                        <input type="range" id="brushSize" min="1" max="10" value="1" class="w-full">
+                        <span id="brushSizeValue" class="text-sm text-gray-600">1</span>
+                    </div>
+                    <button id="emptyBtn" class="tool-button">Eraser</button>
+                    <button id="clearBtn" class="tool-button">Clear All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="messageBox" class="message-box"></div>
+
+    <!-- Link to your external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
